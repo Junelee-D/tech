@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juneleez Tech — About</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" type="image/x-icon" href="HALF.png">
+  <style>
+    .page-wrap { position: relative; z-index: 1; padding: 0 5% 80px; }
+
+    /* Story */
+    .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; max-width:1200px; margin:60px auto 0; }
+    .story-visual { position:relative; }
+    .story-img {
+      width:100%; aspect-ratio:4/3; border-radius:16px;
+      background:linear-gradient(135deg,rgba(13,34,80,0.8),rgba(26,110,255,0.15));
+      border:1px solid rgba(26,110,255,0.2);
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:1rem;
+    }
+    .story-img-icon { font-size:5rem; }
+    .story-img-text { font-family:'Orbitron',sans-serif; font-size:0.85rem; color:var(--silver-mid); letter-spacing:2px; text-align:center; }
+    .story-badge {
+      position:absolute; bottom:-20px; right:-20px;
+      background:linear-gradient(135deg,var(--blue-bright),var(--accent));
+      border-radius:12px; padding:1.2rem 1.5rem; text-align:center;
+      box-shadow:0 8px 30px rgba(26,110,255,0.35);
+    }
+    .story-badge .num { font-family:'Orbitron',sans-serif; font-size:1.8rem; font-weight:900; color:white; }
+    .story-badge .lbl { font-size:0.72rem; color:rgba(255,255,255,0.8); text-transform:uppercase; letter-spacing:1px; }
+
+    /* Values */
+    .values-section { position:relative;z-index:1; padding:80px 5%; background:rgba(13,34,80,0.25); }
+    .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem; max-width:1200px; margin:3rem auto 0; }
+    .v-card { background:rgba(13,34,80,0.5); border:1px solid rgba(26,110,255,0.14); border-radius:12px; padding:2rem; transition:border-color 0.3s,transform 0.3s; }
+    .v-card:hover { border-color:rgba(0,229,255,0.35); transform:translateY(-3px); }
+    .v-icon { font-size:2.2rem; margin-bottom:1rem; }
+    .v-card h3 { font-family:'Orbitron',sans-serif; font-size:0.88rem; margin-bottom:0.6rem; color:var(--white); }
+    .v-card p { color:var(--silver-mid); font-size:0.86rem; line-height:1.7; font-weight:300; }
+
+    /* Mission strip */
+    .mission-strip { position:relative;z-index:1; padding:70px 5%; text-align:center; }
+    .mission-strip blockquote { font-family:'Orbitron',sans-serif; font-size:clamp(1.2rem,2.5vw,1.8rem); font-weight:600; line-height:1.5; max-width:800px; margin:0 auto; color:var(--white); }
+    .mission-strip blockquote em { font-style:normal; color:var(--accent); }
+    .mission-strip cite { display:block; margin-top:1.5rem; font-size:0.82rem; color:var(--silver-dim); letter-spacing:2px; text-transform:uppercase; font-style:normal; }
+
+    /* Stats */
+    .about-stats { position:relative;z-index:1; padding:60px 5%; background:rgba(13,34,80,0.4); }
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto; text-align:center; }
+    .as-num { font-family:'Orbitron',sans-serif; font-size:2.4rem; font-weight:800; color:var(--accent); }
+    .as-label { font-size:0.8rem; color:var(--silver-dim); text-transform:uppercase; letter-spacing:2px; margin-top:6px; }
+ /* ── LIGHT MODE OVERRIDES ── */
+    body.light-mode {
+      --white: #0d0d1a;
+      --silver-mid: #334155;
+      --silver-dim: #64748b;
+      --accent: #1a6eff;
+      --blue-bright: #1a6eff;
+      --blue-glow: #4d9fff;
+      background: #f0f4ff !important;
+      color: #0d0d1a;
+    }
+    body.light-mode::before { display: none; }
+    body.light-mode .stats-strip {
+      background: rgba(220,230,255,0.7) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+    }
+    body.light-mode .s-card {
+      background: rgba(255,255,255,0.85) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+      box-shadow: 0 2px 16px rgba(26,110,255,0.07);
+    }
+    body.light-mode .btn-outline{
+      color: #0d0d1a;
+
+    }
+    body.light-mode .btn-outline:hover{
+      color: #1515ef;
+
+    }
+    body.light-mode .s-card h3 { color: #0d0d1a !important; }
+    body.light-mode .wv-card {
+      background: rgba(255,255,255,0.85) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+    }
+    body.light-mode .cta-band {
+      background: linear-gradient(135deg, rgba(26,110,255,0.1), rgba(0,180,220,0.06)) !important;
+    }
+    body.light-mode section[style*="rgba(13,34,80"] {
+      background: rgba(220,230,255,0.35) !important;
+    }
+    body.light-mode .hero-orb { opacity: 0.12; }
+    body.light-mode nav,
+    body.light-mode header,
+    body.light-mode footer {
+      background: rgba(188, 204, 249, 0.95) !important;
+      border-color: rgba(26,110,255,0.15) !important;
+    }
+
+    /* ── TOGGLE BUTTON ── */
+    #theme-toggle {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(26,110,255,0.35);
+      background: rgba(13,34,80,0.75);
+      backdrop-filter: blur(12px);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    }
+    #theme-toggle:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(26,110,255,0.35); }
+    body.light-mode #theme-toggle {
+      background: rgba(255,255,255,0.85);
+      border-color: rgba(26,110,255,0.25);
+      box-shadow: 0 4px 20px rgba(26,110,255,0.15);
+    }
+    /* Timeline */
+    .timeline-section { position:relative;z-index:1; padding:80px 5%; }
+    .timeline { max-width:700px; margin:3rem auto 0; position:relative; }
+    .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:1px; background:linear-gradient(180deg,var(--blue-bright),transparent); }
+    .tl-item { display:flex; gap:2rem; margin-bottom:2.5rem; position:relative; }
+    .tl-dot { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--blue-bright),var(--accent)); border:2px solid var(--blue-deep); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.55rem; font-weight:700; color:white; margin-top:4px; position:relative; z-index:1; }
+    .tl-content h4 { font-family:'Orbitron',sans-serif; font-size:0.88rem; color:var(--white); margin-bottom:5px; }
+    .tl-content .tl-year { font-size:0.72rem; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+    .tl-content p { color:var(--silver-mid); font-size:0.86rem; line-height:1.65; font-weight:300; }
+
+    /* CTA */
+    .cta-band { position:relative;z-index:1; background:linear-gradient(135deg,rgba(26,110,255,0.18),rgba(0,229,255,0.08)); border-top:1px solid rgba(26,110,255,0.2); border-bottom:1px solid rgba(26,110,255,0.2); padding:60px 5%; text-align:center; }
+    .cta-band h2 { font-family:'Orbitron',sans-serif; font-weight:700; font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:1rem; }
+    .cta-band p { color:var(--silver-mid); max-width:500px; margin:0 auto 2rem; font-weight:300; line-height:1.75; }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    @media(max-width:768px){
+      .story-grid { grid-template-columns:1fr; gap:3rem; }
+      .story-badge { right:0; bottom:-10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE HEADER -->
+  <div class="page-header" style="position:relative;z-index:1;padding:140px 5% 60px;text-align:center;overflow:hidden;">
+    <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:var(--blue-bright);filter:blur(90px);opacity:0.16;top:-150px;right:-80px;pointer-events:none;"></div>
+    <div class="reveal"><div class="section-label">Our Story</div></div>
+    <div class="reveal"><h1 class="section-title">About Juneleez Tech</h1></div>
+    <div class="reveal"><p class="section-desc" style="margin:0 auto;">Born in Tororo, built for the world. We're a team of passionate technologists on a mission to power Africa's digital future.</p></div>
+  </div>
+
+  <!-- STORY -->
+  <div class="page-wrap">
+    <div class="story-grid">
+      <div class="story-visual reveal">
+        <div class="story-img">
+          <div><img src="HALF.png" alt="" style="height: 300px; width:450px;"></div>
+          <div class="story-img-text">Juneleez Tech<br>Tororo, Uganda · Est. 2019</div>
+        </div>
+        <div class="story-badge">
+          <div class="num">3+</div>
+          <div class="lbl">Years Strong</div>
+        </div>
+      </div>
+      <div>
+        <div class="reveal"><div class="section-label">Who We Are</div></div>
+        <div class="reveal"><h2 class="section-title">Technology That<br>Moves You Forward</h2></div>
+        <div class="reveal"><p class="section-desc">At Juneleez Tech, we believe technology should empower — not complicate. Founded in Uganda in 2021, we started with one simple belief: that businesses in East Africa deserve the same quality of technology solutions as enterprises anywhere in the world.</p></div>
+        <div class="reveal" style="margin-top:1rem;"><p class="section-desc">Today we serve clients across Uganda, Kenya, Tanzania, Rwanda, and internationally — combining Silicon Valley-grade engineering with a deep understanding of the African market, its opportunities, and its unique challenges.</p></div>
+        <div class="reveal" style="margin-top:2rem;">
+          <a href="team.html" class="btn-primary" style="margin-right:1rem;">Meet the Team</a>
+          <a href="contact.html" class="btn-outline">Work With Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <div class="mission-strip">
+    <div class="reveal">
+      <blockquote>
+        "Our mission is to <em>democratise access</em> to world-class technology — empowering African businesses to compete, innovate, and lead on the global stage."
+      </blockquote>
+      <cite>— Juneleez Tech Leadership</cite>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="about-stats" id="aboutStats">
+    <div class="stats-grid">
+      <div class="reveal"><div class="as-num" data-target="150">0+</div><div class="as-label">Projects Delivered</div></div>
+      <div class="reveal"><div class="as-num" data-target="80">0+</div><div class="as-label">Clients Served</div></div>
+      <div class="reveal"><div class="as-num" data-target="5">0+</div><div class="as-label">Countries Reached</div></div>
+      <div class="reveal"><div class="as-num" data-target="20">0+</div><div class="as-label">Team Members</div></div>
+      <div class="reveal"><div class="as-num" data-target="6">0+</div><div class="as-label">Years of Innovation</div></div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values-section">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="reveal"><div class="section-label">What Drives Us</div></div>
+      <div class="reveal"><h2 class="section-title">Our Core Values</h2></div>
+      <div class="values-grid">
+        <div class="v-card reveal">
+          <div class="v-icon">💡</div>
+          <h3>Innovation</h3>
+          <p>We constantly explore new technologies and approaches to deliver solutions that are ahead of the curve.</p>
+        </div>
+        <div class="v-card reveal">
+          <div class="v-icon">🤝</div>
+          <h3>Partnership</h3>
+          <p>We embed ourselves in your team. Your success is our success — we think long-term, not transactional.</p>
+        </div>
+        <div class="v-card reveal">
+          <div class="v-icon">⭐</div>
+          <h3>Excellence</h3>
+          <p>We hold ourselves to the highest standards of craft, quality, and professional delivery on every project.</p>
+        </div>
+        <div class="v-card reveal">
+          <div class="v-icon">🌍</div>
+          <h3>Local Impact</h3>
+          <p>Building in Africa, for Africa. Every project is an investment in the continent's digital economy.</p>
+        </div>
+        <div class="v-card reveal">
+          <div class="v-icon">🔍</div>
+          <h3>Transparency</h3>
+          <p>Clear communication, honest pricing, and no surprises. You always know exactly where your project stands.</p>
+        </div>
+        <div class="v-card reveal">
+          <div class="v-icon">🛡️</div>
+          <h3>Integrity</h3>
+          <p>We do the right thing — even when no one is watching. Ethics and trust are the foundation of every engagement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="reveal"><div class="section-label">Our Journey</div></div>
+      <div class="reveal"><h2 class="section-title">How We Got Here</h2></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot">21</div>
+        <div class="tl-content"><div class="tl-year">2019</div><h4>Founded in Tororo</h4><p>Juneleez Tech was established with a small team of 4, focused on web development for local SMEs.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">22</div>
+        <div class="tl-content"><div class="tl-year">2020</div><h4>Cloud Division Launched</h4><p>Expanded into cloud infrastructure services, helping businesses adapt to remote-first operations.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">23</div>
+        <div class="tl-content"><div class="tl-year">2021</div><h4>Regional Expansion</h4><p>Grew to serve clients in Kenya, Tanzania, and Rwanda. Team expanded to 12 full-time engineers.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">24</div>
+        <div class="tl-content"><div class="tl-year">2022</div><h4>AI &amp; Data Practice</h4><p>Launched our AI, automation, and data analytics division — now one of our fastest-growing service lines.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">25</div>
+        <div class="tl-content"><div class="tl-year">2024</div><h4>50+ Projects Milestone</h4><p>Crossed 50 successfully delivered projects and 80 active clients across 5 countries.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">26</div>
+        <div class="tl-content"><div class="tl-year">2025</div><h4>Today &amp; Beyond</h4><p>Team of 20+, a full-service technology firm, and an unwavering commitment to building Africa's digital future.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="reveal">
+      <h2>Join Our Journey</h2>
+      <p>Whether as a client, partner, or team member — we'd love to have you be part of the story.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-primary">Get in Touch</a>
+        <a href="team.html" class="btn-outline">Meet the Team</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="components.js"></script>
+  <script>
+    function animateCount(el) {
+      const target = +el.dataset.target;
+      let count = 0; const step = target / 55;
+      const timer = setInterval(() => {
+        count = Math.min(count + step, target);
+        el.textContent = Math.floor(count) + '+';
+        if (count >= target) { el.textContent = target + '+'; clearInterval(timer); }
+      }, 22);
+    }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('[data-target]').forEach(animateCount); obs.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    obs.observe(document.getElementById('aboutStats'));
+
+  </script>
+  <!-- DARK / LIGHT TOGGLE -->
+  <button id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">🌙</button>
+
+  
+  <script>
+    // ── THEME TOGGLE ──
+    const toggleBtn = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function applyTheme(dark) {
+      document.body.classList.toggle('light-mode', !dark);
+      toggleBtn.textContent = dark ? '🌙' : '☀️';
+      localStorage.setItem('jt-theme', dark ? 'dark' : 'light');
+    }
+
+    // Load saved preference, fallback to system preference
+    const saved = localStorage.getItem('jt-theme');
+    applyTheme(saved ? saved === 'dark' : prefersDark.matches);
+
+    toggleBtn.addEventListener('click', () => {
+      applyTheme(document.body.classList.contains('light-mode'));
+    });
+  </script>
+</body>
+</html>

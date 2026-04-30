@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juneleez Tech — Home</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" type="image/x-icon" href="HALF.png">
+  <style>
+    /* ── HERO ── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px; overflow: hidden; z-index: 1;
+    }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.22; pointer-events: none; }
+    .orb1 { width: 580px; height: 580px; background: var(--blue-bright); top: -120px; right: -80px; animation: floatOrb 8s ease-in-out infinite; }
+    .orb2 { width: 380px; height: 380px; background: var(--accent); bottom: -60px; left: 28%; animation: floatOrb 11s ease-in-out infinite reverse; }
+    .orb3 { width: 280px; height: 280px; background: var(--blue-glow); top: 55%; left: -60px; animation: floatOrb 7s ease-in-out infinite 2s; }
+
+    @keyframes floatOrb { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-28px) scale(1.04)} }
+
+    .hero-content { position: relative; z-index: 2; max-width: 640px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(26,110,255,0.13); border: 1px solid rgba(26,110,255,0.4);
+      color: var(--accent); font-size: 0.75rem; letter-spacing: 3px;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 1.8rem; animation: fadeUp 0.8s ease both;
+    }
+    .hero-badge::before { content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.6)} }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif; font-weight: 800;
+      font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.08;
+      margin-bottom: 1.4rem; animation: fadeUp 0.8s ease 0.15s both;
+    }
+    .hero-title em { font-style: normal; color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.12rem; font-weight: 300; color: var(--silver-mid);
+      line-height: 1.75; margin-bottom: 2.4rem; max-width: 500px;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s ease 0.45s both; }
+
+    /* Hero visual – orbit rings */
+    .hero-visual {
+      position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+      width: 400px; height: 400px; z-index: 2; animation: fadeUp 1s ease 0.4s both;
+    }
+    .ring {
+      position: absolute; border-radius: 50%; border: 1px solid;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      animation: spin linear infinite;
+    }
+    .ring::after { content:''; position:absolute; width:9px; height:9px; background:var(--accent); border-radius:50%; top:-4.5px; left:50%; transform:translateX(-50%); box-shadow:0 0 8px var(--accent),0 0 18px var(--accent); }
+    .r1{width:72px;height:72px;border-color:rgba(0,229,255,0.65);animation-duration:5s;}
+    .r2{width:150px;height:150px;border-color:rgba(26,110,255,0.42);animation-duration:9s;animation-direction:reverse;}
+    .r3{width:240px;height:240px;border-color:rgba(77,159,255,0.26);animation-duration:14s;}
+    .r4{width:330px;height:330px;border-color:rgba(26,110,255,0.14);animation-duration:20s;animation-direction:reverse;}
+    .r5{width:400px;height:400px;border-color:rgba(0,229,255,0.07);animation-duration:28s;}
+    .ring-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:54px; height:54px; background:radial-gradient(circle, var(--silver-mid), var(--blue-bright)); border-radius:50%; box-shadow:0 0 28px var(--accent),0 0 56px rgba(0,229,255,0.28); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.58rem; font-weight:900; color:white; letter-spacing:1px; }
+    @keyframes spin { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── STATS ── */
+    .stats-strip {
+      position: relative; z-index: 1;
+      background: rgba(13,34,80,0.55);
+      border-top: 1px solid rgba(26,110,255,0.18);
+      border-bottom: 1px solid rgba(26,110,255,0.18);
+      padding: 2rem 5%;
+      display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-num { font-family:'Orbitron',sans-serif; font-size:2.1rem; font-weight:800; color:var(--accent); line-height:1; }
+    .stat-label { font-size:0.76rem; color:var(--silver-dim); text-transform:uppercase; letter-spacing:2px; margin-top:5px; }
+
+    /* ── TEASER SERVICES ── */
+    .home-section { position: relative; z-index: 1; padding: 90px 5%; }
+    .home-section.center { text-align: center; }
+    .home-section.center .section-desc { margin: 0 auto 3rem; }
+
+    .services-preview {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.4rem; max-width: 1200px; margin: 0 auto 3rem;
+    }
+    .s-card {
+      background: rgba(13,34,80,0.48); border: 1px solid rgba(26,110,255,0.14);
+      border-radius: 12px; padding: 2.2rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .s-card::before { content:''; position:absolute; top:0;left:0;right:0;height:2px; background:linear-gradient(90deg,transparent,var(--blue-bright),transparent); opacity:0; transition:opacity 0.3s; }
+    .s-card:hover { border-color:rgba(0,229,255,0.35); transform:translateY(-4px); box-shadow:0 18px 50px rgba(26,110,255,0.13); }
+    .s-card:hover::before { opacity:1; }
+    .s-icon { width:48px; height:48px; background:linear-gradient(135deg,rgba(26,110,255,0.18),rgba(0,229,255,0.08)); border:1px solid rgba(26,110,255,0.28); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:1.2rem; }
+    .s-card h3 { font-family:'Orbitron',sans-serif; font-size:0.92rem; font-weight:600; margin-bottom:0.7rem; color:var(--white); }
+    .s-card p { color:var(--silver-mid); font-weight:300; font-size:0.87rem; line-height:1.68; }
+    .s-arrow { display:inline-block; margin-top:1rem; font-size:0.8rem; color:var(--accent); letter-spacing:1px; }
+
+    /* ── WHY US ── */
+    .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1200px; margin:0 auto; }
+    .why-list { display:flex; flex-direction:column; gap:1.4rem; margin-top:2rem; }
+    .why-item { display:flex; gap:1rem; align-items:flex-start; }
+    .why-dot { width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,rgba(26,110,255,0.22),rgba(0,229,255,0.1)); border:1px solid rgba(26,110,255,0.3); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .why-item h4 { font-family:'Orbitron',sans-serif; font-size:0.85rem; color:var(--white); margin-bottom:4px; }
+    .why-item p { color:var(--silver-mid); font-size:0.86rem; line-height:1.65; font-weight:300; }
+
+    .why-visual { position:relative; }
+    .wv-card { background:rgba(13,34,80,0.6); border:1px solid rgba(26,110,255,0.2); border-radius:12px; padding:1.8rem; }
+    .wv-card + .wv-card { margin-top:1rem; }
+    .wv-bar-label { display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:7px; color:var(--silver-mid); }
+    .wv-bar-track { background:rgba(26,110,255,0.12); border-radius:4px; height:8px; overflow:hidden; }
+    .wv-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--blue-bright),var(--accent)); transition:width 1.5s ease; width:0; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      position: relative; z-index: 1;
+      background: linear-gradient(135deg, rgba(26,110,255,0.18), rgba(0,229,255,0.08));
+      border-top: 1px solid rgba(26,110,255,0.2);
+      border-bottom: 1px solid rgba(26,110,255,0.2);
+      padding: 60px 5%; text-align: center;
+    }
+    .cta-band h2 { font-family:'Orbitron',sans-serif; font-weight:700; font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:1rem; }
+    .cta-band p { color:var(--silver-mid); max-width:520px; margin:0 auto 2rem; font-weight:300; line-height:1.75; }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    @media(max-width:768px){
+      .hero-visual{display:none;}
+      .why-grid{grid-template-columns:1fr;}
+      .services-preview{grid-template-columns:1fr;}
+    }
+
+    /* ── LIGHT MODE OVERRIDES ── */
+    body.light-mode {
+      --white: #0d0d1a;
+      --silver-mid: #334155;
+      --silver-dim: #64748b;
+      --accent: #1a6eff;
+      --blue-bright: #1a6eff;
+      --blue-glow: #4d9fff;
+      background: #f0f4ff !important;
+      color: #0d0d1a;
+    }
+    body.light-mode::before { display: none; }
+    body.light-mode .stats-strip {
+      background: rgba(220,230,255,0.7) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+    }
+    body.light-mode .s-card {
+      background: rgba(255,255,255,0.85) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+      box-shadow: 0 2px 16px rgba(26,110,255,0.07);
+    }
+    body.light-mode .s-card h3 { color: #0d0d1a !important; }
+    body.light-mode .wv-card {
+      background: rgba(255,255,255,0.85) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+    }
+    body.light-mode .cta-band {
+      background: linear-gradient(135deg, rgba(26,110,255,0.1), rgba(0,180,220,0.06)) !important;
+    }
+    body.light-mode .btn-outline{
+      color: #0d0d1a;
+
+    }
+    body.light-mode .btn-outline:hover{
+      color: #1515ef;
+
+    }
+    body.light-mode section[style*="rgba(13,34,80"] {
+      background: rgba(220,230,255,0.35) !important;
+    }
+    body.light-mode .hero-orb { opacity: 0.12; }
+    body.light-mode nav,
+    body.light-mode header,
+    body.light-mode footer {
+      background: rgba(240,244,255,0.95) !important;
+      border-color: rgba(26,110,255,0.15) !important;
+    }
+
+    /* ── TOGGLE BUTTON ── */
+    #theme-toggle {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(26,110,255,0.35);
+      background: rgba(13,34,80,0.75);
+      backdrop-filter: blur(12px);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    }
+    #theme-toggle:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(26,110,255,0.35); }
+    body.light-mode #theme-toggle {
+      background: rgba(255,255,255,0.85);
+      border-color: rgba(26,110,255,0.25);
+      box-shadow: 0 4px 20px rgba(26,110,255,0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+    <div class="hero-orb orb3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Innovation at the Core</div>
+      <h1 class="hero-title">
+        Powering the<br>
+        <em>Digital Future</em>
+      </h1>
+      <p class="hero-sub">
+        Juneleez Tech delivers cutting-edge software, cloud infrastructure, and digital transformation solutions that redefine what's possible for businesses across Africa and beyond.
+      </p>
+      <div class="hero-btns">
+        <a href="services.html" class="btn-primary">Explore Services</a>
+        <a href="contact.html" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div style="width:100%;height:100%;position:relative;">
+        <div class="ring r5"></div>
+        <div class="ring r4"></div>
+        <div class="ring r3"></div>
+        <div class="ring r2"></div>
+        <div class="ring r1"></div>
+        <div></div>
+        <div class="ring-center"><img src="HALF.png" alt="" style="height: 50px; width: 80px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip" id="statsStrip">
+    <div class="stat-item reveal"><div class="stat-num" data-target="15">0+</div><div class="stat-label">Projects Delivered</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="8">0+</div><div class="stat-label">Happy Clients</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="6">0+</div><div class="stat-label">Years in Business</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-target="12">0%</div><div class="stat-label">Client Satisfaction</div></div>
+  </div>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="home-section center">
+    <div class="reveal"><div class="section-label">What We Do</div></div>
+    <div class="reveal"><h2 class="section-title">Our Core Services</h2></div>
+    <div class="reveal"><p class="section-desc">From concept to deployment, we craft tech solutions that scale with your vision and drive real-world impact.</p></div>
+
+    <div class="services-preview">
+      <a href="services.html#software" class="s-card reveal">
+        <div class="s-icon">💻</div>
+        <h3>Software Development</h3>
+        <p>Custom web and mobile applications built with modern frameworks to solve your unique challenges.</p>
+        <span class="s-arrow">Learn more →</span>
+      </a>
+      <a href="services.html#cloud" class="s-card reveal">
+        <div class="s-icon">☁️</div>
+        <h3>Cloud Infrastructure</h3>
+        <p>Scalable, secure environments on AWS, Azure &amp; GCP — architected and managed for you.</p>
+        <span class="s-arrow">Learn more →</span>
+      </a>
+      <a href="services.html#ai" class="s-card reveal">
+        <div class="s-icon">🤖</div>
+        <h3>AI &amp; Automation</h3>
+        <p>Intelligent pipelines and AI-powered tools that reduce manual effort and unlock new capabilities.</p>
+        <span class="s-arrow">Learn more →</span>
+      </a>
+      <a href="services.html#security" class="s-card reveal">
+        <div class="s-icon">🔐</div>
+        <h3>Cybersecurity</h3>
+        <p>Security audits, penetration testing, and compliance frameworks protecting your assets 24/7.</p>
+        <span class="s-arrow">Learn more →</span>
+      </a>
+      <a href="services.html#data" class="s-card reveal">
+        <div class="s-icon">📊</div>
+        <h3>Data Analytics</h3>
+        <p>Turn raw data into strategic intelligence — dashboards, pipelines, and predictive models.</p>
+        <span class="s-arrow">Learn more →</span>
+      </a>
+      <a href="services.html#consulting" class="s-card reveal">
+        <div class="s-icon">🗺️</div>
+        <h3>IT Consulting</h3>
+        <p>Expert guidance on digital transformation, technology roadmaps, and system integrations.</p>
+        <span class="s-arrow">Learn more →</span>
+      </a>
+    </div>
+    <div class="reveal"><a href="services.html" class="btn-outline">View All Services →</a></div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="home-section" style="background:rgba(13,34,80,0.2);">
+    <div class="why-grid">
+      <div>
+        <div class="reveal"><div class="section-label">Why Choose Us</div></div>
+        <div class="reveal"><h2 class="section-title">Technology Built<br>for Results</h2></div>
+        <div class="reveal"><p class="section-desc">We don't just build software — we build partnerships. Our focus on quality, speed, and deep local knowledge makes us the trusted tech partner for forward-thinking businesses.</p></div>
+        <div class="why-list">
+          <div class="why-item reveal">
+            <div class="why-dot">⚡</div>
+            <div><h4>Fast Delivery</h4><p>Agile sprints and lean processes ensure your product ships on time, every time.</p></div>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-dot">🌍</div>
+            <div><h4>Local Expertise</h4><p>Deep roots in East Africa mean we understand your market, regulations, and users.</p></div>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-dot">🔒</div>
+            <div><h4>Security-First</h4><p>Every solution is built with security baked in from day one, not bolted on later.</p></div>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-dot">📞</div>
+            <div><h4>24/7 Support</h4><p>Round-the-clock monitoring and support so your systems never sleep unattended.</p></div>
+          </div>
+        </div>
+        <div class="reveal" style="margin-top:2rem;"><a href="about.html" class="btn-primary">Learn About Us</a></div>
+      </div>
+      <div class="why-visual reveal">
+        <div class="wv-card">
+          <div class="wv-bar-label"><span>Client Satisfaction</span><span>99%</span></div>
+          <div class="wv-bar-track"><div class="wv-bar-fill" data-width="99"></div></div>
+        </div>
+        <div class="wv-card">
+          <div class="wv-bar-label"><span>On-time Delivery</span><span>96%</span></div>
+          <div class="wv-bar-track"><div class="wv-bar-fill" data-width="96"></div></div>
+        </div>
+        <div class="wv-card">
+          <div class="wv-bar-label"><span>Repeat Clients</span><span>88%</span></div>
+          <div class="wv-bar-track"><div class="wv-bar-fill" data-width="88"></div></div>
+        </div>
+        <div class="wv-card">
+          <div class="wv-bar-label"><span>Uptime Guarantee</span><span>99.9%</span></div>
+          <div class="wv-bar-track"><div class="wv-bar-fill" data-width="99.9"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div class="reveal">
+      <h2>Ready to Build Something Great?</h2>
+      <p>Tell us about your project and let's craft a solution that drives real results for your business.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-primary">Start a Project</a>
+        <a href="team.html" class="btn-outline">Meet the Team</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DARK / LIGHT TOGGLE -->
+  <button id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">🌙</button>
+
+  <script src="components.js"></script>
+  <script>
+    // Stat counter
+    function animateCount(el) {
+      const raw = el.dataset.target;
+      const target = parseFloat(raw);
+      const suffix = el.dataset.suffix || (raw == '99' ? '%' : '+');
+      let count = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        count = Math.min(count + step, target);
+        el.textContent = (Number.isInteger(target) ? Math.floor(count) : count.toFixed(1)) + suffix;
+        if (count >= target) { el.textContent = target + suffix; clearInterval(timer); }
+      }, 22);
+    }
+    const statsObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('[data-target]').forEach(animateCount);
+          statsObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    statsObs.observe(document.getElementById('statsStrip'));
+
+    // Progress bars
+    const barObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.wv-bar-fill').forEach(b => {
+            b.style.width = b.dataset.width + '%';
+          });
+          barObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.why-visual').forEach(el => barObs.observe(el));
+
+    // ── THEME TOGGLE ──
+    const toggleBtn = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function applyTheme(dark) {
+      document.body.classList.toggle('light-mode', !dark);
+      toggleBtn.textContent = dark ? '🌙' : '☀️';
+      localStorage.setItem('jt-theme', dark ? 'dark' : 'light');
+    }
+
+    // Load saved preference, fallback to system preference
+    const saved = localStorage.getItem('jt-theme');
+    applyTheme(saved ? saved === 'dark' : prefersDark.matches);
+
+    toggleBtn.addEventListener('click', () => {
+      applyTheme(document.body.classList.contains('light-mode'));
+    });
+  </script>
+</body>
+</html>

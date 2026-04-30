@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juneleez Tech — Team</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" type="image/x-icon" href="HALF.png">
+  <style>
+    .page-wrap { position: relative; z-index: 1; padding: 0 5% 80px; }
+ /* ── LIGHT MODE OVERRIDES ── */
+    body.light-mode {
+      --white: #0d0d1a;
+      --silver-mid: #334155;
+      --silver-dim: #64748b;
+      --accent: #1a6eff;
+      --blue-bright: #1a6eff;
+      --blue-glow: #4d9fff;
+      background: #f0f4ff !important;
+      color: #0d0d1a;
+    }
+    body.light-mode::before { display: none; }
+    body.light-mode .stats-strip {
+      background: rgba(220,230,255,0.7) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+    }
+    body.light-mode .btn-outline{
+      color: #0d0d1a;
+
+    }
+    body.light-mode .btn-outline:hover{
+      color: #1515ef;
+
+    }
+    body.light-mode .s-card {
+      background: rgba(255,255,255,0.85) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+      box-shadow: 0 2px 16px rgba(26,110,255,0.07);
+    }
+    body.light-mode .s-card h3 { color: #0d0d1a !important; }
+    body.light-mode .wv-card {
+      background: rgba(255,255,255,0.85) !important;
+      border-color: rgba(26,110,255,0.2) !important;
+    }
+    body.light-mode .cta-band {
+      background: linear-gradient(135deg, rgba(26,110,255,0.1), rgba(0,180,220,0.06)) !important;
+    }
+    body.light-mode section[style*="rgba(13,34,80"] {
+      background: rgba(220,230,255,0.35) !important;
+    }
+    body.light-mode .hero-orb { opacity: 0.12; }
+    body.light-mode nav,
+    body.light-mode header,
+    body.light-mode footer {
+      background: rgba(240,244,255,0.95) !important;
+      border-color: rgba(26,110,255,0.15) !important;
+    }
+    body.light-mode.dept-section { position:relative;z-index:1; padding:70px 5%; background:rgba(13,34,80,0.2); }
+    body.light-mode.dept-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem; max-width:1100px; margin:3rem auto 0; }
+    body.light-mode.dept-card { background:transparent; border:1px solid rgba(26,110,255,0.13); border-radius:12px; padding:1.8rem; text-align:center; transition:border-color 0.3s; }
+    body.light-mode.dept-card:hover { border-color:rgba(0,229,255,0.3); }
+    body.light-mode.dept-icon { font-size:2rem; margin-bottom:0.8rem; }
+    body.light-mode .dept-card h4 { font-family:'Orbitron',sans-serif; font-size:0.82rem; color:black; margin-bottom:0.5rem; }
+    body.light-mode .dept-card p { color:black; font-size:0.8rem; line-height:1.6; }
+    body.light-mode .dept-count { font-family:'Orbitron',sans-serif; font-size:1.5rem; font-weight:800; color:black; margin-top:0.8rem; }
+    .leadership-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; max-width:1200px; margin:3.5rem auto 0; }
+    .lead-card {
+      background: rgba(13,34,80,0.5); border:1px solid rgba(26,110,255,0.15);
+      border-radius:16px; padding:2.5rem; text-align:center;
+      transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+      position:relative; overflow:hidden;
+    }
+    body.light-mode .lead-card::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,transparent,var(--blue-bright),var(--accent),transparent); opacity:0; transition:opacity 0.3s; }
+    body.light-mode .lead-card:hover { border-color:rgba(0,229,255,0.35); transform:translateY(-5px); box-shadow:0 20px 60px rgba(26,110,255,0.14); }
+    body.light-mode .lead-card:hover::before { opacity:1; }
+    body.light-mode .lead-name { font-family:'Orbitron',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); }
+    body.light-mode .lead-role { font-size:0.78rem; color:rgb(1, 7, 61); letter-spacing:1px; margin:6px 0 1rem; text-transform:uppercase; }
+    body.light-mode .lead-bio { color:black; font-size:0.87rem; line-height:1.7; font-weight:300; }
+    body.light-mode .lead-skills { display:flex; flex-wrap:wrap; gap:0.4rem; justify-content:center; margin-top:1.2rem; }
+    body.light-mode .skill-tag { background:rgba(181, 202, 237, 0.12); border:1px solid rgba(26,110,255,0.25); color: black; font-size:0.68rem; letter-spacing:1px; padding:3px 10px; border-radius:100px; }
+
+    /* ── TOGGLE BUTTON ── */
+    #theme-toggle {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(26,110,255,0.35);
+      background: rgba(13,34,80,0.75);
+      backdrop-filter: blur(12px);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    }
+    #theme-toggle:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(26,110,255,0.35); }
+    body.light-mode #theme-toggle {
+      background: rgba(255,255,255,0.85);
+      border-color: rgba(26,110,255,0.25);
+      box-shadow: 0 4px 20px rgba(26,110,255,0.15);
+    }
+    /* Leadership */
+    .leadership-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; max-width:1200px; margin:3.5rem auto 0; }
+    .lead-card {
+      background: rgba(13,34,80,0.5); border:1px solid rgba(26,110,255,0.15);
+      border-radius:16px; padding:2.5rem; text-align:center;
+      transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+      position:relative; overflow:hidden;
+    }
+    .lead-card::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,transparent,var(--blue-bright),var(--accent),transparent); opacity:0; transition:opacity 0.3s; }
+    .lead-card:hover { border-color:rgba(0,229,255,0.35); transform:translateY(-5px); box-shadow:0 20px 60px rgba(26,110,255,0.14); }
+    .lead-card:hover::before { opacity:1; }
+    .lead-name { font-family:'Orbitron',sans-serif; font-size:0.95rem; font-weight:700; color:var(--white); }
+    .lead-role { font-size:0.78rem; color:var(--accent); letter-spacing:1px; margin:6px 0 1rem; text-transform:uppercase; }
+    .lead-bio { color:var(--silver-mid); font-size:0.87rem; line-height:1.7; font-weight:300; }
+    .lead-skills { display:flex; flex-wrap:wrap; gap:0.4rem; justify-content:center; margin-top:1.2rem; }
+    .skill-tag { background:rgba(26,110,255,0.12); border:1px solid rgba(26,110,255,0.25); color:var(--silver-mid); font-size:0.68rem; letter-spacing:1px; padding:3px 10px; border-radius:100px; }
+
+    /* Departments */
+    .dept-section { position:relative;z-index:1; padding:70px 5%; background:rgba(13,34,80,0.2); }
+    .dept-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem; max-width:1100px; margin:3rem auto 0; }
+    .dept-card { background:rgba(13,34,80,0.5); border:1px solid rgba(26,110,255,0.13); border-radius:12px; padding:1.8rem; text-align:center; transition:border-color 0.3s; }
+    .dept-card:hover { border-color:rgba(0,229,255,0.3); }
+    .dept-icon { font-size:2rem; margin-bottom:0.8rem; }
+    .dept-card h4 { font-family:'Orbitron',sans-serif; font-size:0.82rem; color:var(--white); margin-bottom:0.5rem; }
+    .dept-card p { color:var(--silver-dim); font-size:0.8rem; line-height:1.6; }
+    .dept-count { font-family:'Orbitron',sans-serif; font-size:1.5rem; font-weight:800; color:var(--accent); margin-top:0.8rem; }
+
+    /* Culture */
+    .culture-section { position:relative;z-index:1; padding:80px 5%; }
+    .culture-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1100px; margin:3rem auto 0; }
+    .culture-list { display:flex; flex-direction:column; gap:1.2rem; }
+    .c-item { display:flex; align-items:flex-start; gap:1rem; padding:1.2rem; background:rgba(13,34,80,0.4); border:1px solid rgba(26,110,255,0.12); border-radius:10px; transition:border-color 0.3s; }
+    .c-item:hover { border-color:rgba(0,229,255,0.28); }
+    .c-icon { font-size:1.5rem; flex-shrink:0; }
+    .c-item h4 { font-family:'Orbitron',sans-serif; font-size:0.82rem; color:var(--white); margin-bottom:4px; }
+    .c-item p { color:var(--silver-mid); font-size:0.83rem; line-height:1.6; font-weight:300; }
+    .culture-quote blockquote { font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:600; color:var(--white); line-height:1.5; }
+    .culture-quote em { font-style:normal; color:var(--accent); }
+    .culture-quote cite { display:block; margin-top:1rem; font-size:0.78rem; color:var(--silver-dim); text-transform:uppercase; letter-spacing:2px; font-style:normal; }
+
+    /* Join */
+    .cta-band { position:relative;z-index:1; background:linear-gradient(135deg,rgba(26,110,255,0.18),rgba(0,229,255,0.08)); border-top:1px solid rgba(26,110,255,0.2); border-bottom:1px solid rgba(26,110,255,0.2); padding:60px 5%; text-align:center; }
+    .cta-band h2 { font-family:'Orbitron',sans-serif; font-weight:700; font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:1rem; }
+    .cta-band p { color:var(--silver-mid); max-width:500px; margin:0 auto 2rem; font-weight:300; line-height:1.75; }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    @media(max-width:768px){
+      .culture-grid { grid-template-columns:1fr; gap:2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE HEADER -->
+  <div class="page-header" style="position:relative;z-index:1;padding:140px 5% 60px;text-align:center;overflow:hidden;">
+    <div style="position:absolute;width:450px;height:450px;border-radius:50%;background:var(--blue-glow);filter:blur(90px);opacity:0.15;top:-100px;right:-60px;pointer-events:none;"></div>
+    <div class="reveal"><div class="section-label">The People Behind the Work</div></div>
+    <div class="reveal"><h1 class="section-title">Meet Our Team</h1></div>
+    <div class="reveal"><p class="section-desc" style="margin:0 auto;">Brilliant minds united by a common mission — to build the future of technology in Africa.</p></div>
+  </div>
+
+  <!-- LEADERSHIP -->
+  <div class="page-wrap">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="reveal"><div class="section-label">Leadership</div></div>
+      <div class="reveal"><h2 class="section-title">Executive Team</h2></div>
+    </div>
+    <div class="leadership-grid">
+      <div class="lead-card reveal">
+        <div><img src="1.jpg" alt="" style="height: 250px; width: 250px; border-radius: 30px;"></div>
+        <div class="lead-name">Eng. BERNARD ONYANGO</div>
+        <div class="lead-role">CEO &amp; Founder</div>
+        <div class="lead-bio">Visionary leader with 3+ years in enterprise software and business strategy across East Africa. Passionate about using technology to transform lives and drive economic growth.</div>
+        <div class="lead-skills"><span class="skill-tag">Strategy</span><span class="skill-tag">Leadership</span><span class="skill-tag">Business Dev</span></div>
+      </div>
+      <div class="lead-card reveal">
+        <div><img src="Fred.jpg" alt="" style="height: 250px; width: 250px; border-radius: 30px;"></div>
+        <div class="lead-name">Eng. FRED MANGARA</div>
+        <div class="lead-role">CTO &amp; Lead Engineer</div>
+        <div class="lead-bio">Full-stack engineer specialising in cloud-native architecture and scalable distributed systems. Former engineer at Elgon Nova, he's built systems serving millions of users.</div>
+        <div class="lead-skills"><span class="skill-tag">Cloud</span><span class="skill-tag">Node.js</span><span class="skill-tag">Kubernetes</span></div>
+      </div>
+      <div class="lead-card reveal">
+        <div><img src="Richard.jpg" alt="" style="height: 250px; width: 250px; border-radius: 30px;"></div>
+        <div class="lead-name">Eng. SWAGA RICAHRD</div>
+        <div class="lead-role">Head of Design</div>
+        <div class="lead-bio">Award-winning designer who creates intuitive, beautiful digital experiences that users love. Believes great design is the difference between software people tolerate and software people recommend.</div>
+        <div class="lead-skills"><span class="skill-tag">UX Research</span><span class="skill-tag">Figma</span><span class="skill-tag">Design Systems</span></div>
+      </div>
+      <div class="lead-card reveal">
+        <div><img src="Drew1.JPG" alt="" style="height: 250px; width: 250px; border-radius: 30px;"></div>
+        <div class="lead-name">Eng. DREW OMARA</div>
+        <div class="lead-role">Head of Data &amp; AI</div>
+        <div class="lead-bio">AI/ML specialist driving actionable insights from complex datasets. Bachelor's candidate in Computer Engineering at Busitema University, with deep expertise in NLP and computer vision.</div>
+        <div class="lead-skills"><span class="skill-tag">Java</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">NLP</span></div>
+      </div>
+      <div class="lead-card reveal">
+        <div><img src="Stella.jpg" alt="" style="height: 250px; width: 250px; border-radius: 30px;"></div>
+        <div class="lead-name">Eng. STELLA NAMBOOWA</div>
+        <div class="lead-role">Head of Cybersecurity</div>
+        <div class="lead-bio">CISSP-certified security expert with extensive experience in penetration testing, incident response, and compliance. Keeps Juneleez Tech's clients safe day and night.</div>
+        <div class="lead-skills"><span class="skill-tag">Pen Testing</span><span class="skill-tag">CISSP</span><span class="skill-tag">ISO 27001</span></div>
+      </div>
+      <div class="lead-card reveal">
+        <div><img src="Sam.jpg" alt="" style="height: 250px; width: 250px; border-radius: 30px;"></div>
+        <div class="lead-name">Eng. MWESIGWA SAMUEL</div>
+        <div class="lead-role">Client Success Lead</div>
+        <div class="lead-bio">The bridge between our team and our clients. Samuel ensures every engagement is smooth, every delivery exceeds expectations, and every client feels genuinely valued.</div>
+        <div class="lead-skills"><span class="skill-tag">Account Mgmt</span><span class="skill-tag">Agile</span><span class="skill-tag">Communication</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPARTMENTS -->
+  <div class="dept-section">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="reveal"><div class="section-label">Our Departments</div></div>
+      <div class="reveal"><h2 class="section-title">How We're Organised</h2></div>
+    </div>
+    <div class="dept-grid">
+      <div class="dept-card reveal"><div class="dept-icon">💻</div><h4>Engineering</h4><p>Front-end, back-end &amp; mobile developers</p><div class="dept-count">8</div></div>
+      <div class="dept-card reveal"><div class="dept-icon">☁️</div><h4>Cloud &amp; DevOps</h4><p>Infrastructure &amp; CI/CD specialists</p><div class="dept-count">3</div></div>
+      <div class="dept-card reveal"><div class="dept-icon">🤖</div><h4>AI &amp; Data</h4><p>ML engineers &amp; data scientists</p><div class="dept-count">4</div></div>
+      <div class="dept-card reveal"><div class="dept-icon">🔐</div><h4>Security</h4><p>Certified security professionals</p><div class="dept-count">2</div></div>
+      <div class="dept-card reveal"><div class="dept-icon">🎨</div><h4>Design</h4><p>UX/UI designers &amp; researchers</p><div class="dept-count">2</div></div>
+      <div class="dept-card reveal"><div class="dept-icon">🤝</div><h4>Client Success</h4><p>Account managers &amp; project leads</p><div class="dept-count">3</div></div>
+    </div>
+  </div>
+
+  <!-- CULTURE -->
+  <div class="culture-section">
+    <div class="culture-grid" style="max-width:1100px;margin:0 auto;">
+      <div class="culture-quote reveal">
+        <div class="section-label">Life at Juneleez</div>
+        <h2 class="section-title">A Culture of<br>Excellence</h2>
+        <blockquote>"We hire for <em>curiosity</em> and <em>character</em>. Skills can be taught — a desire to build something meaningful cannot."</blockquote>
+        <cite>— Alex Mutebi, CEO</cite>
+        <div style="margin-top:2rem;">
+          <a href="contact.html" class="btn-primary">Join Our Team</a>
+        </div>
+      </div>
+      <div class="culture-list">
+        <div class="c-item reveal"><div class="c-icon">📚</div><div><h4>Continuous Learning</h4><p>Dedicated learning budgets, conference sponsorships, and weekly knowledge-sharing sessions for every team member.</p></div></div>
+        <div class="c-item reveal"><div class="c-icon">🏡</div><div><h4>Flexible Work</h4><p>Hybrid working environment — we trust our team to deliver results from wherever they work best.</p></div></div>
+        <div class="c-item reveal"><div class="c-icon">🌱</div><div><h4>Career Growth</h4><p>Clear progression paths, mentorship programs, and honest feedback to help every person reach their potential.</p></div></div>
+        <div class="c-item reveal"><div class="c-icon">🎉</div><div><h4>Team Community</h4><p>Regular team events, hackathons, and a genuine sense of family among colleagues who care about each other's success.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="reveal">
+      <h2>Want to Join Us?</h2>
+      <p>We're always looking for talented, passionate people who want to help build Africa's digital future.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-primary">Apply Now</a>
+        <a href="about.html" class="btn-outline">Learn About Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DARK / LIGHT TOGGLE -->
+  <button id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">🌙</button>
+
+  <script src="components.js"></script>
+  <script>
+    
+    // ── THEME TOGGLE ──
+    const toggleBtn = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function applyTheme(dark) {
+      document.body.classList.toggle('light-mode', !dark);
+      toggleBtn.textContent = dark ? '🌙' : '☀️';
+      localStorage.setItem('jt-theme', dark ? 'dark' : 'light');
+    }
+
+    // Load saved preference, fallback to system preference
+    const saved = localStorage.getItem('jt-theme');
+    applyTheme(saved ? saved === 'dark' : prefersDark.matches);
+
+    toggleBtn.addEventListener('click', () => {
+      applyTheme(document.body.classList.contains('light-mode'));
+    });
+  </script>
+</body>
+</html>
